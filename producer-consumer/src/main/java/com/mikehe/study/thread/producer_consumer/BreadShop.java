@@ -37,6 +37,7 @@ public class BreadShop {
 						 Thread.currentThread().getName()+"要生产的数量:"+ produceNum+"; "+
 						 "总数超过最大存量，暂时不能生产! 等待中...");
 				//线程在此等待中，持有此对象的其他线程通知(notify())后，继续执行
+				//此线程释放持有的对象锁
 				this.wait();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -45,7 +46,9 @@ public class BreadShop {
 		
 
 		try {
-			log.info(Thread.currentThread().getName()+" 正在生产面包"+produceNum+"个...");
+			log.info("面包篮子最大存量："+MAX_NUM+"; "+
+					 "当前存量："+breadBasket.size()+"; "+
+					Thread.currentThread().getName()+" 正在生产面包"+produceNum+"个...");
 			Thread.currentThread().sleep(10000);
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
@@ -82,7 +85,9 @@ public class BreadShop {
 		}
 		
 		try {
-			log.info(Thread.currentThread().getName()+" 正在消费面包"+consumeNum+"个...");
+			log.info("面包篮子最大存量："+MAX_NUM+"; "+
+					 "当前存量："+breadBasket.size()+"; "+
+					Thread.currentThread().getName()+" 正在消费面包"+consumeNum+"个...");
 			Thread.currentThread().sleep(10000);
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
@@ -95,7 +100,8 @@ public class BreadShop {
 		log.info("面包篮子最大存量："+MAX_NUM+"; "+
 				Thread.currentThread().getName()+"消费了:"+ consumeNum+"个; "+
 				   "当前存量："+breadBasket.size()+"; ");
-		//
+		
+		//通知其他此对象上的线程继续运行，释放对象锁
 		this.notifyAll();
 	}
 	

@@ -1,7 +1,5 @@
 package com.mikehe.study.thread.producer_consumer;
 
-import java.util.Random;
-
 import org.apache.log4j.Logger;
 
 public class Client {

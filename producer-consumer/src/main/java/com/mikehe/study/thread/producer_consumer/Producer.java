@@ -26,10 +26,11 @@ public class Producer extends Thread {
 	
 	@Override
 	public void run() {
-		while (true) {//不停在生产
+		//while (true) {//不停在生产
+		for (int i=0; i<5; i++) {	
 			breadShop.produce(new Random().nextInt(50));
 			try {
-				Thread.currentThread().sleep(2000);//休息2s
+				Thread.currentThread().sleep(5000);//休息5s
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

@@ -25,11 +25,12 @@ public class Consumer extends Thread {
 	
 	@Override
 	public void run() {
-		while (true) {//不停在消费
+		//while (true) {//不停在消费
+		for (int i=0; i<5; i++) {	
 			//breadShop.consume(consumeNum);
 			breadShop.consume(new Random().nextInt(50));
 			try {
-				Thread.currentThread().sleep(2000);//休息2s
+				Thread.currentThread().sleep(5000);//休息5s
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
